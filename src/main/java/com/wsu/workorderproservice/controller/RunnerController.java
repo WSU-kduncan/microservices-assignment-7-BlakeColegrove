@@ -32,6 +32,7 @@ public class RunnerController {
         // based on the provided email which will correspond to a RunnerId. 
         // This would be in the case of a user logging in to their account and pulling up all relevant data.
         // All params are REQUIRED as it is the login for a user.
+        return null;
     }     
     
     @PostMapping
@@ -39,6 +40,7 @@ public class RunnerController {
         // this will take in an email and create a Runner and generate an id to be used as
         // the runnerId. 
         // All params are REQUIRED because it is the creation of an account.
+        return null;
     }
 
     @PutMapping("/{runnerId}")
@@ -46,12 +48,14 @@ public class RunnerController {
         // there will be a try-catch block here that will have conditions to handle
         // a successful update, invalid data, no matching Runner, and any random exception.
         // This would be if a user is in the settings and updating their information. Values cannot be NULL.
+        return null;
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ServiceResponseDTO> deleteRunner() {
         // deletes a Runner based on a given runnerId
         // exception thrown on runner DNE
+        return null;
     }
 
     // Down here there will be handleErrorResponse methods to assist in handling the exceptions

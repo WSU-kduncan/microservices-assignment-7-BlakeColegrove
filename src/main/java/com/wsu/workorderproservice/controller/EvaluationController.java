@@ -29,24 +29,28 @@ public class EvaluationController {
         // this will take the params to format the page results like normal
         // it will return an HTTP status ok message and return all evaluations for a given
         // Runner based on the Runners ID/email (deciding about using email based on in class discussion)
+        return null;
     }     
     
     @PostMapping
     public ResponseEntity<ServiceResponseDTO> createEvaluation() {
         // this will take in an @PathVariable (probably the Runners ID) and create
         // an evaluation or the Runner and matched workout
+        return null;
     }
 
     @PutMapping("/{runnerId}")
     public ResponseEntity<ServiceResponseDTO> updateEvaluation() {
         // there will be a try-catch block here that will have conditions to handle
         // a successful update, invalid data, no matching evaluation, and any random exception.
+        return null;
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ServiceResponseDTO> deleteEvaluation() {
         // deletes an evaluation based on a given evaluationId
         // exception thrown on evaluation DNE
+        return null;
     }
 
     // Down here there will be handleErrorResponse methods to assist in handling the exceptions

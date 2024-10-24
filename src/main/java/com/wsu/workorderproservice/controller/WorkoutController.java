@@ -34,12 +34,14 @@ public class WorkoutController {
         // This would be in the case that a runner is looking up all their workouts.
         // An optional param could be an evaluationId or details within an evaluation to pull up a specific or 
         // filtered to a specific type of workout
+        return null;
     }     
     
     @PostMapping
     public ResponseEntity<ServiceResponseDTO> createWorkout() {
         // creates a workout and generates a workoutId to correspond
         // All params are REQUIRED because it is the creation of a workout.
+        return null;
     }
 
     @PutMapping("/{runnerId}")
@@ -47,12 +49,14 @@ public class WorkoutController {
         // there will be a try-catch block here that will have conditions to handle
         // a successful update, invalid data, no matching workout, and any random exception.
         // This would if a user is adjusting the specifics of an existing saved workout. Values cannot be NULL.
+        return null;
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ServiceResponseDTO> deleteWorkout() {
         // deletes a workout based on a given workoutId
         // exception thrown on workout DNE
+        return null;
     }
 
     // Down here there will be handleErrorResponse methods to assist in handling the exceptions
