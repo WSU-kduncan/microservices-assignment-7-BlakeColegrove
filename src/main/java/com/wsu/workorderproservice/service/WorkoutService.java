@@ -1,8 +1,8 @@
 package com.wsu.workorderproservice.service;
 
 import com.wsu.workorderproservice.dto.WorkoutDTO;
-import com.wsu.workorderproservice.exception.DatabaseErrorException;
-import com.wsu.workorderproservice.exception.InvalidRequestException;
+//import com.wsu.workorderproservice.exception.DatabaseErrorException;
+//import com.wsu.workorderproservice.exception.InvalidRequestException;
 import com.wsu.workorderproservice.model.Workout;
 import com.wsu.workorderproservice.repository.WorkoutRepository;
 
@@ -27,26 +27,31 @@ public class WorkoutService {
         // there will be a try-catch block in here that tries to retrieve the workout, exception thrown if
         // workout does not exist by id.
         // return statement will format the table results in a DTO.builder().
+        return null;
     }
 
     public WorkoutDTO save(WorkoutDTO workoutDTO) {
         // there will be a try-catch block that will attempt to save the workout
         // if the workout DNE by id an exception will be thrown.
         // the WorkoutDTO will be saved to the WorkoutRepository
+        return null;
     }
 
     public WorkoutDTO update(Integer id, WorkoutDTO workoutDTO) {
         // there will be a try-catch block that will attempt to update the workout
         // if the workout DNE by id an exception will be thrown.
         // the WorkoutDTO once updated will call the save method
+        return null;
     }
 
     public Workout convertToEntity(WorkoutDTO workoutDTO) {
         // this will convert the DTO to an entity model
+        return null;
     }
 
     public WorkoutDTO convertToDTO(Workout workout) {
         // this will convert the entity model to a DTO
+        return null;
     }
 
     public void delete(Integer id) {
