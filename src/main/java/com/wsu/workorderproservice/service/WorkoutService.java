@@ -24,39 +24,60 @@ public class WorkoutService {
     private final WorkoutRepository workoutRepository;
 
     public Page<WorkoutDTO> get(String search, String sortField, String sortOrder, Integer page, Integer rpp) {
-        // there will be a try-catch block in here that tries to retrieve the workout, exception thrown if
-        // workout does not exist by id.
-        // return statement will format the table results in a DTO.builder().
-        return null;
+        try {
+            Page<Object[]> workouts = workoutRepository.findBySearch(search, PageRequest.of(page-1, rpp, sort(sortField, sortOrder)));
+            return workouts.map(workout -> WorkoutDTO.builder().workoutId((int) workout[0]).type((int) workout[1]).build());
+        } catch (Exception e) {
+            log.error("Failed to retrieve workouts. search:{}, sortField:{}, sortOrder:{}, page:{}, rpp:{}. Exception:",
+                    search, sortField, sortOrder, page, rpp, e);
+            throw new DatabaseErrorException("Failed to retrieve workouts.", e);
+        }
     }
 
     public WorkoutDTO save(WorkoutDTO workoutDTO) {
-        // there will be a try-catch block that will attempt to save the workout
-        // if the workout DNE by id an exception will be thrown.
-        // the WorkoutDTO will be saved to the WorkoutRepository
-        return null;
+        if (workoutRepository.existsById(workoutDTO.getWorkoutId())) {
+            throw new InvalidRequestException("workout already exist with this workoutId.");
+        }
+        try {
+            return convertToDTO(workoutRepository.save(convertToEntity(workoutDTO)));
+        } catch (Exception e) {
+            log.error("Failed to create new workout. Exception:", e);
+            throw new DatabaseErrorException("Failed to create new workout", e);
+        }
     }
 
     public WorkoutDTO update(Integer id, WorkoutDTO workoutDTO) {
-        // there will be a try-catch block that will attempt to update the workout
-        // if the workout DNE by id an exception will be thrown.
-        // the WorkoutDTO once updated will call the save method
-        return null;
+        if (!workoutRepository.existsById(id)) {
+            throw new InvalidRequestException("Invalid workout id.");
+        }
+        try {
+            Workout workout = convertToEntity(workoutDTO);
+            workout.setId(id);
+            return convertToDTO(workoutRepository.save(workout));
+        } catch (Exception e) {
+            log.error("Failed to update workout, workoutId:{}. Exception:{}", id, e);
+            throw new DatabaseErrorException("Failed to update workout", e);
+        }
     }
 
     public Workout convertToEntity(WorkoutDTO workoutDTO) {
-        // this will convert the DTO to an entity model
-        return null;
+        return Workout.builder().id(workoutDTO.getWorkoutId()).type(workoutDTO.getType()).build();
     }
 
     public WorkoutDTO convertToDTO(Workout workout) {
-        // this will convert the entity model to a DTO
-        return null;
+        return WorkoutDTO.builder().workoutId(workout.getId()).type(workout.getType()).build();
     }
 
     public void delete(Integer id) {
-        // there will be a try-catch block to attempt to delete the workout by id
-        // if workout DNE by id then an exception will be thrown.
-        // Will delete by id if exists.
+        if (!workoutRepository.existsById(id)) {
+            throw new InvalidRequestException("workout with ID " + id + " does not exist.");
+        }
+        try {
+            workoutRepository.deleteById(id);
+            log.info("Successfully deleted workout with ID {}", id);
+        } catch (Exception e) {
+            log.error("Failed to delete workout, workoutId:{}. Exception:{}", id, e);
+            throw new DatabaseErrorException("Failed to delete workout", e);
+        }
     }
 }
